@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <style>
+        .styled-container {
+            background-color: #f8f9fa; /* Add a light gray background */
+            padding: 20px;
+            margin-top: 30px; /* Add some top margin */
+            border-radius: 5px; /* Add rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+    </style>
+</head>
+<body>
+    <div class="container col-md-8 border mt-4 rounded">
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary m-2" id="back-to-home">Back to Home</button>
+        </div>
+        <h2 class="text-center m-2">Student List</h2>
+        <div class="container styled-container text-center">
+            <form method="post" id="studentForm">
+                {% csrf_token %}
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="select_all"></th>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td><input type="checkbox" name="selected_students" value="{{ student.id }}"></td>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.email }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+            <div class="d-flex justify-content-left m-2">
+                    <button type="submit" name="delete_selected" class="btn btn-danger m-2">Delete Selected</button>
+                </div>
+        </div><br>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('back-to-home').addEventListener('click', function() {
+            location.href = '{% url "index" %}';
+        });
+
+        document.getElementById('select_all').addEventListener('click', function() {
+            var checkboxes = document.querySelectorAll('input[name="selected_students"]');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        });
+
+        // Confirm delete selected
+        document.querySelector('form').addEventListener('submit', function(event) {
+            if (!confirm('Are you sure you want to delete the selected students?')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

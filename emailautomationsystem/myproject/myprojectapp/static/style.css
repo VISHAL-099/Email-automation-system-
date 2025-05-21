@@ -1,0 +1,13 @@
+/* static/css/style.css */
+
+body {
+    padding-top: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 960px;
+}

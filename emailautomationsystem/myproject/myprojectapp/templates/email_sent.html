@@ -1,0 +1,11 @@
+<!-- templates/email_sent.html -->
+
+{% extends 'base_generic.html' %}
+
+{% block title %}Emails Sent{% endblock %}
+
+{% block content %}
+  <h1>Emails Sent</h1>
+  <p>Emails have been sent successfully!</p>
+  <a href="{% url 'send_emails' %}" class="btn btn-primary">Send More Emails</a>
+{% endblock %}

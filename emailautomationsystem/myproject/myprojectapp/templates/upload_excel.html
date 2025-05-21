@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Excel Sheet</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .styled-container {
+            background-color: #f8f9fa; /* Add a light gray background */
+            padding: 20px;
+            margin-top: 30px; /* Add some top margin */
+            border-radius: 5px; /* Add rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+    </style>
+</head>
+<body>
+    <div class="container col-md-6 border mt-4 rounded">
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary m-2" id="back-to-home">Back to Home</button>
+        </div>
+        <h2 class="text-center mt-4">Upload Excel Sheet</h2>
+
+        <div class="container styled-container col-md-10 border">
+            <div class="mt-4 d-flex justify-content-center">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" name="excel_file" accept=".xlsx, .xls">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+        </div><br>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('back-to-home').addEventListener('click', function() {
+            location.href = '{% url "index" %}';
+        });
+    </script>
+    
+</body>
+</html>
